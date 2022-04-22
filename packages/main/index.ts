@@ -24,9 +24,14 @@ async function createWindow() {
 			preload: join(__dirname, "../preload/index.cjs"),
 		},
 		width: 400,
+		minWidth: 400,
 		height: 720,
+		minHeight: 520,
 		transparent: true,
-		resizable: false,
+		alwaysOnTop: true,
+		frame: false,
+		hasShadow: false,
+		darkTheme: true,
 	});
 
 	if (app.isPackaged) {
@@ -36,7 +41,7 @@ async function createWindow() {
 		const url = `http://${process.env["VITE_DEV_SERVER_HOST"]}:${process.env["VITE_DEV_SERVER_PORT"]}`;
 
 		win.loadURL(url);
-		win.webContents.openDevTools();
+		// win.webContents.openDevTools();
 	}
 
 	// Test active push message to Renderer-process

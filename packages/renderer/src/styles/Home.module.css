@@ -18,7 +18,7 @@ a:hover {
 .link {
 	margin: 4px;
 	list-style: none;
-	background-color: #2b2d42;
+	background-color: rgba(0, 0, 0, 0.2);
 	padding: 8px;
 	min-width: 100px;
 	border-radius: 6px;

@@ -2,14 +2,40 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #000814;
+	background-color: rgba(0, 0, 0, 0.1);
 	color: #edf2f4;
-	min-height: 100vh;
+	border: 1px solid #edf2f4;
+	border-radius: 4px;
+	overflow-x: hidden;
+	user-select: none;
+	-webkit-app-region: drag;
 }
 
 .container {
 	margin: 20px;
 	padding: 20px;
-	border: 2px solid #001d3d;
-	min-height: 80vh;
+	border: 2px solid #edf2f4;
+	min-height: 75vh;
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #fff;
+	border: 1px solid #000;
+	border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }

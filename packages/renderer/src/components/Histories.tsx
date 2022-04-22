@@ -39,7 +39,7 @@ function Histories() {
 							);
 						})}
 					</div>
-					{ID && time && <div className="editor">{savedNote}</div>}
+					{ID && time && <div className="editor side">{savedNote}</div>}
 				</div>
 			) : (
 				<p style={{ width: 320 }}>No histories found.</p>

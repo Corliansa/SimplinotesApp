@@ -1,22 +1,29 @@
 .editor {
 	margin: 20px 0px;
 	border: 1px dashed #001d3d;
+	border-radius: 4px;
 	overflow: hidden;
 	white-space: pre-wrap;
-	width: 60vw;
 	resize: none;
-	background-color: transparent;
+	background-color: rgba(0, 0, 0, 0.5);
 	color: #edf2f4;
 	outline: none;
-	min-height: 80vh;
-	min-width: 320px;
+	width: max(320px, calc(100vw - 90px));
+	min-height: 70vh;
+	user-select: text;
+	-webkit-app-region: no-drag;
+}
+
+.side {
+	width: calc(100vw - 220px);
 }
 
 .markdown {
-	width: 60vw;
-	min-width: 320px;
-	min-height: 80vh;
+	width: max(320px, calc(100vw - 90px));
+	min-height: 75vh;
 	overflow: hidden;
+	user-select: text;
+	-webkit-app-region: no-drag;
 }
 
 .markdown hr {
@@ -39,7 +46,7 @@
 }
 
 .markdown tbody > tr:nth-child(odd) {
-	background-color: #001123;
+	background-color: rgba(0, 17, 35, 0.3);
 }
 
 .markdown td {
@@ -96,11 +103,14 @@
 	display: flex;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 480px) {
 	.notes-list {
 		margin: 20px 0 0 0;
 	}
 	.dynamic {
 		display: block;
+	}
+	.side {
+		width: max(320px, calc(100vw - 90px));
 	}
 }

@@ -13,7 +13,7 @@ import remarkTypograf from "@mavrin/remark-typograf";
 // import remarkDirective from "remark-directive";
 // import rehypeRaw from "rehype-raw";
 // import rehypeSanitize from "rehype-sanitize";
-// import remarkFrontmatter from "remark-frontmatter";
+import remarkFrontmatter from "remark-frontmatter";
 // import remarkYamlConfig from "remark-yaml-config";
 // import remarkMdx from "remark-mdx";
 import example from "../etc/tutorial";
@@ -61,8 +61,11 @@ Double click to start editing.`
 			(document.documentElement || document.body.parentNode || document.body)
 				.scrollTop;
 
-		textRef.current!.style.height = "auto";
-		textRef.current!.style.height = textRef.current!.scrollHeight + "px";
+		try {
+			textRef.current!.style.height = "auto";
+			textRef.current!.style.height = textRef.current!.scrollHeight + "px";
+		} catch (e) {}
+
 		window.scrollTo(scrollLeft, scrollTop);
 	};
 
@@ -82,7 +85,7 @@ Double click to start editing.`
 					onBlur={resizeText}
 					className="editor"
 					ref={textRef}
-					onDoubleClick={toggleEdit}
+					// onDoubleClick={toggleEdit}
 					onInput={(e) => {
 						setText(e.currentTarget.value);
 						if (e.currentTarget.value === "!!test") setText(example);
@@ -92,7 +95,7 @@ Double click to start editing.`
 					defaultValue={text}
 				/>
 			) : (
-				<div onDoubleClick={toggleEdit}>
+				<div onDoubleClick={() => savedNote === null && toggleEdit()}>
 					<ReactMarkdown
 						className="markdown"
 						remarkPlugins={[
@@ -101,7 +104,7 @@ Double click to start editing.`
 							[remarkEmoji, { emoticon: true }],
 							[remarkTypograf, { locale: ["en-US"] }],
 							// remarkDirective,
-							// remarkFrontmatter,
+							remarkFrontmatter,
 							// remarkYamlConfig,
 							// remarkMdx,
 						]}
@@ -125,6 +128,28 @@ Double click to start editing.`
 									<code className={className} {...props}>
 										{children}
 									</code>
+								);
+							},
+							a({ href, node, ...props }) {
+								return href?.match(/https?:\/\//) ? (
+									<a
+										href={href}
+										target="_blank"
+										rel="noopener noreferrer"
+										{...props}
+									/>
+								) : (
+									<Link
+										to={href!}
+										onClick={() =>
+											window.scrollTo({
+												top: document.getElementById(href!.substring(1))
+													?.offsetTop,
+												behavior: "smooth",
+											})
+										}
+										{...props}
+									/>
 								);
 							},
 						}}

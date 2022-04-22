@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// @ts-ignore
 import { v4 } from "uuid";
 import styles from "../styles/Home.module.css";
 function Home() {
@@ -9,7 +10,12 @@ function Home() {
 	return (
 		<div className="container">
 			<div className={styles.main}>
-				<h1>Simplinotes</h1>
+				<div className="menu">
+					<h1>Simplinotes</h1>
+					<Link to="/settings" style={{ fontSize: "3rem" }}>
+						⚙
+					</Link>
+				</div>
 				<Link to={`/note/${v4()}`}>New note ▶</Link>
 				<hr />
 				{notesList && notesList?.length > 0 ? (
