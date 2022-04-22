@@ -1,0 +1,52 @@
+.main {
+	width: 320px;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+}
+
+a {
+	color: #ffc300;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ffd60a;
+	text-decoration: underline;
+}
+
+.link {
+	margin: 4px;
+	list-style: none;
+	background-color: #2b2d42;
+	padding: 8px;
+	min-width: 100px;
+	border-radius: 6px;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+
+.link:hover {
+	text-decoration: none;
+}
+
+hr {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 0;
+	border-top: 1px solid #eee;
+	width: 100%;
+}
+
+.desc {
+	font-size: 0.8em;
+	color: #aaa;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.desc:hover {
+	text-decoration: none;
+}
