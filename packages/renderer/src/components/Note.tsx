@@ -30,22 +30,22 @@ function Note() {
 	const [lastBackup, setBackup] = useState(savedNote);
 
 	const [text, setText] = useState(
-		savedNote !== null
-			? savedNote
-			: `# New notes
----
-Double click to start editing.`
+		savedNote !== null ? savedNote : "# New notes"
 	);
 	const [edit, setEdit] = useState(false);
 
 	const toggleEdit = () => {
 		const saveTime = Math.round(new Date().getTime() / 1000);
 		if (edit && lastBackup !== text) {
-			localStorage.setItem(`notes@${saveTime}:${ID!}`, lastBackup);
+			localStorage.setItem(`notes@${saveTime}:${ID!}`, lastBackup || "");
 			console.log(`Auto backup at ${saveTime} for ${ID}`);
 			setBackup(text);
 		}
-
+		if (!edit) {
+			try {
+				setTimeout(() => textRef.current!.focus(), 50);
+			} catch {}
+		}
 		setEdit((edit) => !edit);
 	};
 
@@ -78,15 +78,13 @@ Double click to start editing.`
 				<Link to="/">← Back</Link>
 				<Link
 					to=""
-					onClick={() => {
-						const container =
-							document.getElementsByClassName("container")?.[0]!;
-						container.scrollTo({
+					onClick={() =>
+						window.scrollTo({
 							left: 0,
-							top: container.scrollHeight,
+							top: document.body.scrollHeight,
 							behavior: "smooth",
-						});
-					}}
+						})
+					}
 				>
 					▼
 				</Link>
@@ -160,14 +158,12 @@ Double click to start editing.`
 									<Link
 										to={href!}
 										onClick={() =>
-											document
-												.getElementsByClassName("container")?.[0]!
-												.scrollTo({
-													top:
-														(document.getElementById(href!.substring(1))
-															?.offsetTop! || 0) - 30,
-													behavior: "smooth",
-												})
+											window.scrollTo({
+												top:
+													(document.getElementById(href!.substring(1))
+														?.offsetTop! || 0) - 10,
+												behavior: "smooth",
+											})
 										}
 										{...props}
 									/>
@@ -181,15 +177,13 @@ Double click to start editing.`
 						<Link to={`/history/${ID}`}>History</Link>
 						<Link
 							to=""
-							onClick={() => {
-								const container =
-									document.getElementsByClassName("container")?.[0]!;
-								container.scrollTo({
+							onClick={() =>
+								window.scrollTo({
 									left: 0,
 									top: 0,
 									behavior: "smooth",
-								});
-							}}
+								})
+							}
 						>
 							▲
 						</Link>

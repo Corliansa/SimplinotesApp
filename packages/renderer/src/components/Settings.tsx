@@ -9,7 +9,7 @@ function Home() {
 	const [background, setBackground] = useState(settings?.background || "");
 	const [color, setColor] = useState(settings?.color || "");
 
-	const handleSave = () =>
+	const handleSave = () => {
 		localStorage.setItem(
 			"@simplinotes/settings",
 			JSON.stringify({
@@ -18,6 +18,8 @@ function Home() {
 				color: color !== "transparent" && color,
 			})
 		);
+		location.reload();
+	};
 
 	const handleKeyDown = (e: any) => {
 		if (e.key === "Enter") {
@@ -36,9 +38,8 @@ function Home() {
 				</div>
 				<h1>Settings</h1>
 				<hr />
-				<div className={styles.nodrag}>
+				<div>
 					Background:
-					<br />
 					<input
 						type="text"
 						placeholder="rgba(0, 0, 0, 0.1)"
@@ -52,20 +53,18 @@ function Home() {
 						value={background}
 						onKeyDown={handleKeyDown}
 					/>
-					<br />
 					Text color:
-					<br />
 					<input
 						type="text"
 						placeholder="#edf2f4"
 						style={{
-							borderBottomColor: color !== "transparent" && color,
+							borderBottomColor:
+								color !== "transparent" && color !== settings?.color && color,
 						}}
 						onChange={(e) => setColor(e.target.value)}
 						value={color}
 						onKeyDown={handleKeyDown}
 					/>
-					<br />
 					<input
 						type="button"
 						value="Clear all backups"
@@ -76,6 +75,7 @@ function Home() {
 							backups.map((key) => localStorage.removeItem(key));
 							alert(`Cleared ${backups.length} backups`);
 							console.log(`Cleared ${backups.length} backups`, backups);
+							location.reload();
 						}}
 					/>
 					<input
@@ -85,6 +85,7 @@ function Home() {
 							localStorage.removeItem("@simplinotes/settings");
 							alert("Cleared settings");
 							console.log("Cleared settings");
+							location.reload();
 						}}
 					/>
 					<input
@@ -95,6 +96,7 @@ function Home() {
 							keys.map((key) => localStorage.removeItem(key));
 							alert(`Cleared ${keys.length} data`);
 							console.log(`Cleared ${keys.length} data`, keys);
+							location.reload();
 						}}
 					/>
 					<input
@@ -135,6 +137,7 @@ function Home() {
 											`Imported ${parsed?.length} key-value pair`,
 											parsed
 										);
+										location.reload();
 									} catch (e) {
 										alert(`Failed to import data from clipboard: ${e}`);
 									}
@@ -144,8 +147,6 @@ function Home() {
 					/>
 				</div>
 				<hr />
-				Refresh app to see the changes.
-				<br />
 				{(
 					Object.entries(localStorage).reduce(
 						(acc, [a, b]) => acc + a.length + b.length,

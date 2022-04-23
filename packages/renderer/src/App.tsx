@@ -20,6 +20,7 @@ function App() {
 				"@simplinotes/settings",
 				JSON.stringify({ initial: true })
 			);
+			location.reload();
 		}
 	}, []);
 
