@@ -91,7 +91,9 @@ Double click to start editing.`
 						if (e.currentTarget.value === "!!test") setText(example);
 						resizeText();
 					}}
-					onKeyDown={(e) => e.metaKey && e.key === "Enter" && toggleEdit()}
+					onKeyDown={(e) =>
+						e.metaKey && (e.key === "Enter" || e.key === "s") && toggleEdit()
+					}
 					defaultValue={text}
 				/>
 			) : (

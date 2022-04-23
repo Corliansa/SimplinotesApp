@@ -11,10 +11,9 @@ import "./App.css";
 
 function App() {
 	const settings = localStorage.getItem("@simplinotes/settings");
-	const customStyle = JSON.parse(settings! || "{}")?.style;
+	const customStyle = JSON.parse(settings! || "{}");
 
 	useEffect(() => {
-		console.log(customStyle);
 		if (!settings) {
 			localStorage.setItem("notes:tutorial", example);
 			localStorage.setItem(

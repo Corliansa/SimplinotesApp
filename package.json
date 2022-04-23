@@ -3,7 +3,7 @@
 	"productName": "Simplinotes",
 	"private": true,
 	"version": "1.0.0",
-	"description": "Simple note taking app.",
+	"description": "A simple note taking app equipped with markdown and katex.",
 	"author": "Corliansa Kusumah",
 	"license": "MIT",
 	"main": "dist/main/index.cjs",
