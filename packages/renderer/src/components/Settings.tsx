@@ -39,7 +39,7 @@ function Home() {
 				<h1>Settings</h1>
 				<hr />
 				<div>
-					Background:
+					Background
 					<input
 						type="text"
 						placeholder="rgba(0, 0, 0, 0.1)"
@@ -53,7 +53,7 @@ function Home() {
 						value={background}
 						onKeyDown={handleKeyDown}
 					/>
-					Text color:
+					Text color
 					<input
 						type="text"
 						placeholder="#edf2f4"
@@ -92,59 +92,96 @@ function Home() {
 						type="button"
 						value="Clear all data"
 						onClick={() => {
-							const keys = Object.keys(localStorage);
-							keys.map((key) => localStorage.removeItem(key));
-							alert(`Cleared ${keys.length} data`);
-							console.log(`Cleared ${keys.length} data`, keys);
+							localStorage.clear();
+							alert("Cleared all data");
+							console.log("Cleared all data");
 							location.reload();
 						}}
 					/>
-					<input
-						type="button"
-						value="Export data"
-						onClick={() => {
-							const data = Object.keys(localStorage)
-								.filter((key) => !key.match(/^notes@\d+:[\w-]+/))
-								.map((key) => ({
-									key,
-									value: localStorage.getItem(key),
-								}));
-							navigator.clipboard
-								.writeText(JSON.stringify(data))
-								.then(() => {
-									alert(`${data.length} data copied to clipboard`);
-									console.log(`Copied ${data?.length} key-value pair`, data);
-								})
-								.catch((err) => alert(`Failed to copy data: ${err}`));
-						}}
-					/>
-					<input
-						type="button"
-						value="Import data"
-						onClick={() => {
-							navigator.clipboard
-								.readText()
-								.then((data) => {
-									try {
-										const parsed = JSON.parse(data);
-										console.log(`Received data: ${parsed}`);
-										parsed.map(
-											({ key, value }: { key: string; value: string }) =>
-												localStorage.setItem(key, value)
-										);
-										alert(`Successfully imported ${parsed?.length} data`);
-										console.log(
-											`Imported ${parsed?.length} key-value pair`,
-											parsed
-										);
-										location.reload();
-									} catch (e) {
-										alert(`Failed to import data from clipboard: ${e}`);
-									}
-								})
-								.catch((err) => alert(`Failed to read clipboard: ${err}`));
-						}}
-					/>
+					Synchronization
+					<div className="menu">
+						<input
+							type="button"
+							value="Export data"
+							onClick={() => {
+								const data = Object.keys(localStorage)
+									.filter((key) => !key.match(/^notes@\d+:[\w-]+/))
+									.map((key) => ({
+										key,
+										value: localStorage.getItem(key),
+									}));
+								navigator.clipboard
+									.writeText(JSON.stringify(data))
+									.then(() => {
+										alert(`${data.length} data copied to clipboard`);
+										console.log(`Copied ${data?.length} key-value pair`, data);
+									})
+									.catch((err) => alert(`Failed to copy data: ${err}`));
+							}}
+						/>
+						<input
+							type="button"
+							value="Import data"
+							onClick={() => {
+								navigator.clipboard
+									.readText()
+									.then((data) => {
+										try {
+											const parsed = JSON.parse(data);
+											console.log(`Received data: ${parsed}`);
+											parsed.map(
+												({ key, value }: { key: string; value: string }) =>
+													localStorage.setItem(key, value)
+											);
+											alert(`Successfully imported ${parsed?.length} data`);
+											console.log(
+												`Imported ${parsed?.length} key-value pair`,
+												parsed
+											);
+											location.reload();
+										} catch (e) {
+											alert(`Failed to import data from clipboard: ${e}`);
+										}
+									})
+									.catch((err) => alert(`Failed to read clipboard: ${err}`));
+							}}
+						/>
+					</div>
+					Trash
+					<div className="menu">
+						<input
+							type="button"
+							value="Restore all"
+							onClick={() => {
+								const backups = Object.keys(localStorage).filter((key) =>
+									key.match(/^notes@bin:[\w-]+/)
+								);
+								backups.map((key) => {
+									localStorage.setItem(
+										key.replace("@bin", ""),
+										localStorage.getItem(key)!
+									);
+									localStorage.removeItem(key);
+								});
+								alert(`Restored ${backups.length} trash`);
+								console.log(`Resored ${backups.length} trash`, backups);
+								location.reload();
+							}}
+						/>
+						<input
+							type="button"
+							value="Clear all"
+							onClick={() => {
+								const backups = Object.keys(localStorage).filter((key) =>
+									key.match(/^notes@bin:[\w-]+/)
+								);
+								backups.map((key) => localStorage.removeItem(key));
+								alert(`Cleared ${backups.length} trash`);
+								console.log(`Cleared ${backups.length} trash`, backups);
+								location.reload();
+							}}
+						/>
+					</div>
 				</div>
 				<hr />
 				{(

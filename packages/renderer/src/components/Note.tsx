@@ -25,22 +25,23 @@ import "../styles/Note.css";
 
 function Note() {
 	const { id: ID } = useParams();
-	const savedNote = localStorage.getItem(`notes:${ID!}`)!;
-
-	const [lastBackup, setBackup] = useState(savedNote);
 
 	const [text, setText] = useState(
-		savedNote !== null ? savedNote : "# New notes"
+		localStorage.getItem(`notes:${ID!}`)! ?? "# New notes"
 	);
+	const [lastBackup, setBackup] = useState(text);
 	const [edit, setEdit] = useState(false);
 
-	const toggleEdit = () => {
+	const saveBackup = () => {
 		const saveTime = Math.round(new Date().getTime() / 1000);
 		if (edit && lastBackup !== text) {
 			localStorage.setItem(`notes@${saveTime}:${ID!}`, lastBackup || "");
 			console.log(`Auto backup at ${saveTime} for ${ID}`);
 			setBackup(text);
 		}
+	};
+
+	const toggleEdit = () => {
 		if (!edit) {
 			try {
 				setTimeout(() => textRef.current!.focus(), 50);
@@ -70,6 +71,15 @@ function Note() {
 		window.scrollTo(scrollLeft, scrollTop);
 	};
 
+	const deleteNote = () => {
+		localStorage.setItem(`notes@bin:${ID!}`, text);
+		localStorage.removeItem(`notes:${ID!}`);
+		const backups = Object.keys(localStorage).filter(
+			(key) => key.match(/^notes@\d+:[\w-]+/) && key.endsWith(ID!)
+		);
+		backups.map((key) => localStorage.removeItem(key));
+	};
+
 	const textRef = useRef<HTMLTextAreaElement>(null);
 
 	return (
@@ -95,7 +105,10 @@ function Note() {
 			{edit ? (
 				<textarea
 					onFocus={resizeText}
-					onBlur={resizeText}
+					onBlur={() => {
+						resizeText();
+						saveBackup();
+					}}
 					className="editor"
 					ref={textRef}
 					// onDoubleClick={toggleEdit}
@@ -110,7 +123,7 @@ function Note() {
 					defaultValue={text}
 				/>
 			) : (
-				<div onDoubleClick={() => savedNote === null && toggleEdit()}>
+				<div onDoubleClick={() => text === "# New notes" && toggleEdit()}>
 					<ReactMarkdown
 						className="markdown"
 						remarkPlugins={[
@@ -187,10 +200,7 @@ function Note() {
 						>
 							▲
 						</Link>
-						<Link
-							to="/"
-							onClick={() => localStorage.removeItem(`notes:${ID!}`)}
-						>
+						<Link to="/" onClick={deleteNote}>
 							Delete
 						</Link>
 					</div>
