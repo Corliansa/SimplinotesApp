@@ -16,6 +16,7 @@ import remarkTypograf from "@mavrin/remark-typograf";
 import remarkFrontmatter from "remark-frontmatter";
 // import remarkYamlConfig from "remark-yaml-config";
 // import remarkMdx from "remark-mdx";
+import rehypeSlug from "rehype-slug";
 import example from "../etc/tutorial";
 import { useParams, Link } from "react-router-dom";
 
@@ -75,6 +76,20 @@ Double click to start editing.`
 		<div className="container">
 			<div className="menu">
 				<Link to="/">← Back</Link>
+				<Link
+					to=""
+					onClick={() => {
+						const container =
+							document.getElementsByClassName("container")?.[0]!;
+						container.scrollTo({
+							left: 0,
+							top: container.scrollHeight,
+							behavior: "smooth",
+						});
+					}}
+				>
+					▼
+				</Link>
 				<Link to="" onClick={toggleEdit}>
 					{edit ? "Done" : "Edit"}
 				</Link>
@@ -101,7 +116,7 @@ Double click to start editing.`
 					<ReactMarkdown
 						className="markdown"
 						remarkPlugins={[
-							[remarkGfm, { singleTilde: false }],
+							remarkGfm,
 							remarkMath,
 							[remarkEmoji, { emoticon: true }],
 							[remarkTypograf, { locale: ["en-US"] }],
@@ -112,6 +127,7 @@ Double click to start editing.`
 						]}
 						rehypePlugins={[
 							[rehypeKatex, { displayMode: true, trust: true }],
+							rehypeSlug,
 							// rehypeRaw,
 							// rehypeSanitize,
 						]}
@@ -144,11 +160,14 @@ Double click to start editing.`
 									<Link
 										to={href!}
 										onClick={() =>
-											window.scrollTo({
-												top: document.getElementById(href!.substring(1))
-													?.offsetTop,
-												behavior: "smooth",
-											})
+											document
+												.getElementsByClassName("container")?.[0]!
+												.scrollTo({
+													top:
+														(document.getElementById(href!.substring(1))
+															?.offsetTop! || 0) - 30,
+													behavior: "smooth",
+												})
 										}
 										{...props}
 									/>
@@ -160,6 +179,20 @@ Double click to start editing.`
 					</ReactMarkdown>
 					<div className="menu">
 						<Link to={`/history/${ID}`}>History</Link>
+						<Link
+							to=""
+							onClick={() => {
+								const container =
+									document.getElementsByClassName("container")?.[0]!;
+								container.scrollTo({
+									left: 0,
+									top: 0,
+									behavior: "smooth",
+								});
+							}}
+						>
+							▲
+						</Link>
 						<Link
 							to="/"
 							onClick={() => localStorage.removeItem(`notes:${ID!}`)}

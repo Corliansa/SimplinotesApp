@@ -12,7 +12,11 @@ function Home() {
 	const handleSave = () =>
 		localStorage.setItem(
 			"@simplinotes/settings",
-			JSON.stringify({ ...settings, background, color })
+			JSON.stringify({
+				...settings,
+				background,
+				color: color !== "transparent" && color,
+			})
 		);
 
 	const handleKeyDown = (e: any) => {
@@ -38,7 +42,12 @@ function Home() {
 					<input
 						type="text"
 						placeholder="rgba(0, 0, 0, 0.1)"
-						style={{ color }}
+						style={{
+							borderBottomColor:
+								background !== "transparent" &&
+								background !== settings?.background &&
+								background,
+						}}
 						onChange={(e) => setBackground(e.target.value)}
 						value={background}
 						onKeyDown={handleKeyDown}
@@ -49,7 +58,9 @@ function Home() {
 					<input
 						type="text"
 						placeholder="#edf2f4"
-						style={{ color }}
+						style={{
+							borderBottomColor: color !== "transparent" && color,
+						}}
 						onChange={(e) => setColor(e.target.value)}
 						value={color}
 						onKeyDown={handleKeyDown}

@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-import "katex/dist/katex.min.css";
-import "../styles/Note.css";
-
 function Histories() {
 	const getNumber = (str: string): number =>
 		Number(str?.split(":")?.[0]?.split("@")?.[1] || 0);

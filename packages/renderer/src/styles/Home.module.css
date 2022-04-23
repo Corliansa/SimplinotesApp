@@ -1,6 +1,6 @@
 .main {
 	width: 320px;
-	height: 80vh;
+	height: 85vh;
 	display: flex;
 	flex-direction: column;
 }
@@ -72,6 +72,7 @@ input[type="text"] {
 	border-radius: 6px;
 	width: 90%;
 	outline: none;
+	text-shadow: 1px 1px black;
 }
 
 input[type="button"] {
@@ -82,4 +83,5 @@ input[type="button"] {
 	margin: 4px;
 	border-radius: 6px;
 	width: 90%;
+	text-shadow: 1px 1px black;
 }

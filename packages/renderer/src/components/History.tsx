@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-import "katex/dist/katex.min.css";
-import "../styles/Note.css";
-
 function History() {
 	const { id: ID, time } = useParams();
 	const savedNote = localStorage.getItem(`notes@${time}:${ID!}`)!;

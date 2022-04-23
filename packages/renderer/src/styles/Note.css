@@ -9,7 +9,7 @@
 	color: #edf2f4;
 	outline: none;
 	width: max(320px, calc(100vw - 90px));
-	min-height: 70vh;
+	min-height: 75vh;
 	user-select: text;
 	-webkit-app-region: no-drag;
 }

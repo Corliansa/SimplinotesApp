@@ -6,21 +6,23 @@
 	color: #edf2f4;
 	border: 1px solid #edf2f4;
 	border-radius: 4px;
-	overflow-x: hidden;
+	overflow: hidden;
 	user-select: none;
 	-webkit-app-region: drag;
+	height: 99.6vh;
 }
 
 .container {
 	margin: 20px;
 	padding: 20px;
 	border: 2px solid #edf2f4;
-	min-height: 75vh;
+	min-height: 85vh;
 	overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
 	width: 6px;
+	height: 12px;
 }
 
 /* Track */
@@ -32,7 +34,7 @@
 ::-webkit-scrollbar-thumb {
 	background: #fff;
 	border: 1px solid #000;
-	border-radius: 2px;
+	border-radius: 4px;
 }
 
 /* Handle on hover */
