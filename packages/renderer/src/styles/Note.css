@@ -1,5 +1,5 @@
 .editor {
-	margin: 20px 0px;
+	margin: 20px 0 0 0;
 	border: 1px dashed #001d3d;
 	border-radius: 4px;
 	overflow: hidden;
@@ -8,8 +8,8 @@
 	background-color: rgba(0, 0, 0, 0.5);
 	color: #edf2f4;
 	outline: none;
-	width: max(320px, calc(100vw - 90px));
-	min-height: 75vh;
+	width: calc(100vw - 76px);
+	min-height: calc(100vh - 120px);
 	user-select: text;
 	-webkit-app-region: no-drag;
 }
@@ -19,16 +19,15 @@
 }
 
 .markdown {
-	width: max(320px, calc(100vw - 90px));
-	min-height: 75vh;
+	width: calc(100vw - 70px);
+	min-height: calc(100vh - 110px);
 	overflow: hidden;
 	user-select: text;
 	-webkit-app-region: no-drag;
 }
 
 .markdown hr {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin: 20px 0;
 	border: 0;
 	border-top: 1px solid #eee;
 }

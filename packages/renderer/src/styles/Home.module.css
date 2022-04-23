@@ -1,6 +1,6 @@
 .main {
-	width: 320px;
-	min-height: 85vh;
+	width: 330px;
+	min-height: calc(100vh - 70px);
 	display: flex;
 	flex-direction: column;
 }

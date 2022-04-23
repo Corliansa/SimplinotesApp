@@ -26,7 +26,7 @@ async function createWindow() {
 		width: 400,
 		minWidth: 400,
 		height: 720,
-		minHeight: 520,
+		minHeight: 440,
 		transparent: true,
 		alwaysOnTop: true,
 		frame: false,
