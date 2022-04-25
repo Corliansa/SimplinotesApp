@@ -40,6 +40,7 @@ function Home() {
 				<hr />
 				<div>
 					Background
+					<br />
 					<input
 						type="text"
 						placeholder="rgba(0, 0, 0, 0.1)"
@@ -53,7 +54,9 @@ function Home() {
 						value={background}
 						onKeyDown={handleKeyDown}
 					/>
+					<br />
 					Text color
+					<br />
 					<input
 						type="text"
 						placeholder="#edf2f4"
@@ -65,6 +68,7 @@ function Home() {
 						value={color}
 						onKeyDown={handleKeyDown}
 					/>
+					<br />
 					<input
 						type="button"
 						value="Clear all backups"
@@ -98,7 +102,9 @@ function Home() {
 							location.reload();
 						}}
 					/>
+					<br />
 					Synchronization
+					<br />
 					<div className="menu">
 						<input
 							type="button"
@@ -148,6 +154,7 @@ function Home() {
 						/>
 					</div>
 					Trash
+					<br />
 					<div className="menu">
 						<input
 							type="button"

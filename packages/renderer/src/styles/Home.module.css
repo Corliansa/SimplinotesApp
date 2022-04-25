@@ -1,6 +1,7 @@
 .main {
-	width: 330px;
-	min-height: calc(100vh - 70px);
+	/* width: 330px; */
+	width: calc(100vw - 70px);
+	min-height: calc(100vh - 66px);
 	display: flex;
 	flex-direction: column;
 }
@@ -62,7 +63,7 @@ input[type="text"] {
 	padding: 8px;
 	margin: 8px 4px;
 	border-radius: 6px;
-	width: 90%;
+	width: calc(100vw - 94px);
 	outline: none;
 	-webkit-text-stroke: 1px #aaa;
 	user-select: text;
@@ -76,7 +77,7 @@ input[type="button"] {
 	padding: 8px;
 	margin: 4px 2px;
 	border-radius: 6px;
-	width: 90%;
+	width: calc(100vw - 74px);
 	-webkit-text-stroke: 1px #aaa;
 	user-select: auto;
 	-webkit-app-region: no-drag;

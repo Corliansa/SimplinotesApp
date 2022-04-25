@@ -20,7 +20,7 @@ function Histories() {
 				<Link to={`/note/${ID}`}>← Back</Link>
 			</div>
 			{notesList.length > 0 ? (
-				<div className="dynamic">
+				<div className="dynamic" style={{ marginBottom: 8 }}>
 					<div className="notes-list">
 						Timestamp
 						<hr />
@@ -39,7 +39,9 @@ function Histories() {
 					{ID && time && <div className="editor side">{savedNote}</div>}
 				</div>
 			) : (
-				<p style={{ width: 320 }}>No histories found.</p>
+				<div className="editor" style={{ padding: 2, marginBottom: 4 }}>
+					No histories found.
+				</div>
 			)}
 		</div>
 	);

@@ -38,7 +38,7 @@ function Home() {
 										{regSubtitle.exec(note?.replace(/\n/gm, "<br>")!)?.[1] ||
 											note
 												?.replace(note?.split("\n")[0], "")
-												.slice(0, 50)
+												.slice(0, 200)
 												.replace(/^\s+/, "") ||
 											"No additional text"}
 									</span>

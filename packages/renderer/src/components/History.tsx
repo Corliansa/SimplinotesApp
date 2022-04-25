@@ -10,7 +10,9 @@ function History() {
 			<div className="menu">
 				<Link to={`/history/${ID}`}>← Back</Link>
 			</div>
-			<div className="editor">{savedNote || "No note found"}</div>
+			<div className="editor" style={{ padding: 2, marginBottom: 4 }}>
+				{savedNote || "No note found"}
+			</div>
 		</div>
 	);
 }
