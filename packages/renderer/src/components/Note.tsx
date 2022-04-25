@@ -14,6 +14,7 @@ import remarkTypograf from "@mavrin/remark-typograf";
 // import rehypeRaw from "rehype-raw";
 // import rehypeSanitize from "rehype-sanitize";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkToc from "remark-toc";
 // import remarkYamlConfig from "remark-yaml-config";
 // import remarkMdx from "remark-mdx";
 import rehypeSlug from "rehype-slug";
@@ -133,6 +134,7 @@ function Note() {
 							[remarkTypograf, { locale: ["en-US"] }],
 							// remarkDirective,
 							remarkFrontmatter,
+							[remarkToc, { heading: "toc|table\\s*of\\s*contents?" }],
 							// remarkYamlConfig,
 							// remarkMdx,
 						]}

@@ -20,17 +20,18 @@ function Home() {
 				<hr />
 				{notesList && notesList?.length > 0 ? (
 					<>
-						{notesList.map((noteID) => {
+						{notesList.sort().map((noteID) => {
 							const note = localStorage.getItem(noteID);
-							const regTitle = /^---.*?<br>title: "([^"]+)"<br>.*?---/gim;
-							const regSubtitle = /^---.*?<br>subtitle: "([^"]+)"<br>.*?---/gim;
+							const regTitle = /^---.*?<br>title: "?([^"]+)"?<br>.*?---/gim;
+							const regSubtitle =
+								/^---.*?<br>description: "?([^"]+)"?<br>.*?---/gim;
 							return (
 								<Link
 									to={`/note/${noteID.split("notes:")[1]}`}
 									className={styles.link}
 									key={noteID}
 								>
-									{note?.split("\n")[0].split("#")[1] ||
+									{note?.split("\n")[0].replace(/^\s*#/, "") ||
 										regTitle.exec(note?.replace(/\n/gm, "<br>")!)?.[1] ||
 										"Untitled"}
 									<br />
@@ -39,7 +40,7 @@ function Home() {
 											note
 												?.replace(note?.split("\n")[0], "")
 												.slice(0, 200)
-												.replace(/^\s+/, "") ||
+												.replace(/^\s*/, "") ||
 											"No additional text"}
 									</span>
 								</Link>

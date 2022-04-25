@@ -94,25 +94,11 @@
 }
 
 .notes-list {
-	margin: 20px 20px 0 0;
-	width: 100px;
+	margin: 20px 10px 0 0;
+	width: 110px;
 }
 
 .dynamic {
 	display: flex;
-}
-
-@media screen and (max-width: 520px) {
-	.notes-list {
-		margin: 20px 0 0 0;
-		width: auto;
-	}
-	.dynamic {
-		display: block;
-	}
-	.side {
-		margin: 4px;
-		width: max(320px, calc(100vw - 80px));
-		min-height: calc(100vh - 228px);
-	}
+	margin-bottom: 8px;
 }

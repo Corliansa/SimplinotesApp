@@ -20,7 +20,7 @@ function Histories() {
 				<Link to={`/note/${ID}`}>← Back</Link>
 			</div>
 			{notesList.length > 0 ? (
-				<div className="dynamic" style={{ marginBottom: 8 }}>
+				<div className="dynamic">
 					<div className="notes-list">
 						Timestamp
 						<hr />
@@ -28,10 +28,14 @@ function Histories() {
 							const time = getNumber(key);
 							return (
 								<div key={key}>
+									<Link to={`/history/${ID}/${time}`}>⮕ </Link>
 									<Link to="" onClick={() => setTime(time)}>
 										{new Date(time * 1000).toLocaleString("en-UK")}
 									</Link>
-									<Link to={`/history/${ID}/${time}`}> ⮕</Link>
+									<Link to="" onClick={() => localStorage.removeItem(key)}>
+										{" "}
+										🗑
+									</Link>
 								</div>
 							);
 						})}
