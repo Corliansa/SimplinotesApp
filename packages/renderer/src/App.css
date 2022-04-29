@@ -52,3 +52,29 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
+
+@media print {
+	#root {
+		border: 0;
+	}
+	.App {
+		background: white !important;
+		color: black !important;
+	}
+	.container {
+		border: 0;
+	}
+	.menu {
+		display: none;
+	}
+	.markdown {
+		-webkit-app-region: no-drag;
+		user-select: auto;
+	}
+	.markdown pre > div {
+		border: 1px dashed black;
+	}
+	::-webkit-scrollbar {
+		display: none;
+	}
+}

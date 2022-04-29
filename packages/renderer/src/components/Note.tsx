@@ -81,6 +81,18 @@ function Note() {
 		backups.map((key) => localStorage.removeItem(key));
 	};
 
+	const tryPrint = () => {
+		if (!edit && window.print) {
+			const regTitle = /^---.*?<br>title: "?([^"]+?)"?<br>.*?---/gim;
+			document.title =
+				regTitle.exec(text?.replace(/\n/gm, "<br>")!)?.[1] ||
+				text?.split("\n")[0].replace(/^\s*#/, "") ||
+				"Untitled";
+			window.print();
+			document.title = "Simplinotes";
+		}
+	};
+
 	return (
 		<div className="container">
 			<div className="menu">
@@ -97,9 +109,16 @@ function Note() {
 				>
 					▼
 				</Link>
-				<Link to="" onClick={toggleEdit}>
-					{edit ? "Done" : "Edit"}
-				</Link>
+				<div>
+					<Link to="" onClick={toggleEdit}>
+						{edit ? "Done" : "Edit"}
+					</Link>
+					{!edit && (
+						<Link to="" onClick={tryPrint}>
+							{" 🖨"}
+						</Link>
+					)}
+				</div>
 			</div>
 			{edit ? (
 				<textarea

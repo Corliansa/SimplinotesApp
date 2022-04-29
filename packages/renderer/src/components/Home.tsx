@@ -22,9 +22,9 @@ function Home() {
 					<>
 						{notesList.sort().map((noteID) => {
 							const note = localStorage.getItem(noteID);
-							const regTitle = /^---.*?<br>title: "?([^"]+)"?<br>.*?---/gim;
+							const regTitle = /^---.*?<br>title: "?([^"]+?)"?<br>.*?---/gim;
 							const regSubtitle =
-								/^---.*?<br>description: "?([^"]+)"?<br>.*?---/gim;
+								/^---.*?<br>description: "?([^"]+?)"?<br>.*?---/gim;
 							return (
 								<Link
 									to={`/note/${noteID.split("notes:")[1]}`}
