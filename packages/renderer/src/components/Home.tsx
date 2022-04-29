@@ -31,14 +31,17 @@ function Home() {
 									className={styles.link}
 									key={noteID}
 								>
-									{note?.split("\n")[0].replace(/^\s*#/, "") ||
-										regTitle.exec(note?.replace(/\n/gm, "<br>")!)?.[1] ||
+									{regTitle.exec(note?.replace(/\n/gm, "<br>")!)?.[1] ||
+										note?.split("\n")[0].replace(/^\s*#/, "") ||
 										"Untitled"}
 									<br />
 									<span className={styles.desc}>
 										{regSubtitle.exec(note?.replace(/\n/gm, "<br>")!)?.[1] ||
 											note
-												?.replace(note?.split("\n")[0], "")
+												?.replace(/\n/gm, "<br>")
+												?.replace(/^---.*?---/gm, "")
+												?.replace(/<br>/gm, "\n")
+												?.replace(note!.split("\n")[0], "")
 												.slice(0, 200)
 												.replace(/^\s*/, "") ||
 											"No additional text"}

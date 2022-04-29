@@ -12,6 +12,7 @@
 	min-height: calc(100vh - 115px);
 	user-select: text;
 	-webkit-app-region: no-drag;
+	caret-color: #ffc300;
 }
 
 .side {
@@ -88,6 +89,8 @@
 
 .menu {
 	display: flex;
+	position: sticky;
+	top: 0;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;

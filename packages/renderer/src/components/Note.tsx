@@ -33,6 +33,9 @@ function Note() {
 	const [lastBackup, setBackup] = useState(text);
 	const [edit, setEdit] = useState(false);
 
+	const textRef = useRef<HTMLTextAreaElement>(null);
+	const divRef = useRef<HTMLDivElement>(null);
+
 	const saveBackup = () => {
 		const saveTime = Math.round(new Date().getTime() / 1000);
 		if (edit && lastBackup !== text) {
@@ -43,11 +46,8 @@ function Note() {
 	};
 
 	const toggleEdit = () => {
-		if (!edit) {
-			try {
-				setTimeout(() => textRef.current!.focus(), 50);
-			} catch {}
-		}
+		if (!edit) setTimeout(() => textRef?.current!.focus(), 1);
+		else setTimeout(() => divRef?.current!.focus(), 1);
 		setEdit((edit) => !edit);
 	};
 
@@ -80,8 +80,6 @@ function Note() {
 		);
 		backups.map((key) => localStorage.removeItem(key));
 	};
-
-	const textRef = useRef<HTMLTextAreaElement>(null);
 
 	return (
 		<div className="container">
@@ -119,12 +117,20 @@ function Note() {
 						resizeText();
 					}}
 					onKeyDown={(e) =>
-						e.metaKey && (e.key === "Enter" || e.key === "s") && toggleEdit()
+						(e.ctrlKey || e.metaKey) &&
+						(e.key === "Enter" || e.key === "s") &&
+						toggleEdit()
 					}
 					defaultValue={text}
 				/>
 			) : (
-				<div onDoubleClick={() => text === "# New notes" && toggleEdit()}>
+				<div
+					onDoubleClick={() => text === "# New notes" && toggleEdit()}
+					onKeyUp={(e) => e.key === "Enter" && toggleEdit()}
+					tabIndex={0}
+					ref={divRef}
+					style={{ outline: "none" }}
+				>
 					<ReactMarkdown
 						className="markdown"
 						remarkPlugins={[
